@@ -1,2 +1,2 @@
-# Flux-App
-React Flux App Tutorial
+# React-Redux-App
+React App with Redux Tutorial
