@@ -1,7 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import { render } from "react-dom";
+import { Provider } from "react-redux"; // Provider wraps up your React application and makes it aware of the entire Redux’s store.
 import index from "./js/index";
-import App from "./App";
+import store from "./js/store/index";
+import App from "./App.js";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
