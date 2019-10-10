@@ -6,17 +6,22 @@ The worker saga will call the remote API with the call method from redux-saga/ef
 */
 
 import { takeEvery, call, put } from "redux-saga/effects";
+import {
+  DATA_REQUESTED,
+  DATA_LOADED,
+  API_ERRORED
+} from "../constants/action-types";
 
 export default function* watcherSaga() {
-  yield takeEvery("DATA_REQUESTED", workerSaga); // for each action of this type spin up a workerSaga
+  yield takeEvery(DATA_REQUESTED, workerSaga); // for each action of this type spin up a workerSaga
 }
 
 function* workerSaga() {
   try {
     const payload = yield call(getData); // call function getData()
-    yield put({ type: "DATA_LOADED", payload }); // dispatch () a "DATA_LOADED" action with a new payload
+    yield put({ type: DATA_LOADED, payload }); // dispatch () a "DATA_LOADED" action with a new payload
   } catch (e) {
-    yield put({ type: "API_ERRORED", payload: e });
+    yield put({ type: API_ERRORED, payload: e });
   }
 }
 
