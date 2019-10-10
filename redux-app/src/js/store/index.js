@@ -1,16 +1,23 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers/index";
 import { forbiddenWordsMiddleware } from "../middleware";
-import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+import apiSaga from "../sagas/api-saga";
+
+const initialiseSagaMiddleware = createSagaMiddleware();
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // For using Redux Dev Tools together with other middlewares
 
 const store = createStore(
   rootReducer,
-  storeEnhancers(applyMiddleware(forbiddenWordsMiddleware, thunk))
+  storeEnhancers(
+    applyMiddleware(forbiddenWordsMiddleware, initialiseSagaMiddleware)
+  )
 ); // createStore takes reducer as first argument.
 /* Reducers produce the state of your application */
 // reducer is a JS function that takes 2 parameters => current state and an action
+initialiseSagaMiddleware.run(apiSaga);
+
 export default store;
 
 /* Redux store api has important methods, such as:
