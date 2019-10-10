@@ -13,7 +13,7 @@ export function forbiddenWordsMiddleware({ dispatch }) {
           action.payload.title.includes(word)
         );
         if (foundWord.length) {
-          return dispatch({ type: "FOUND_BAD_WORD" }); // If the word types is one of the forbidden words, the action type will be dispatched as "FOUND_BAD_WORD"
+          return dispatch({ type: "FOUND_BAD_WORD" }); // If the word typed is one of the forbidden words, the action type will be dispatched as "FOUND_BAD_WORD"
         }
       }
       return next(action); // If you forget to return next(action) the application will stop, and no other action will reach the reducer.
