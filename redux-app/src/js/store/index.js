@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers/index";
 import { forbiddenWordsMiddleware } from "../middleware";
+import thunk from "redux-thunk";
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // For using Redux Dev Tools together with other middlewares
 
 const store = createStore(
   rootReducer,
-  storeEnhancers(applyMiddleware(forbiddenWordsMiddleware))
+  storeEnhancers(applyMiddleware(forbiddenWordsMiddleware, thunk))
 ); // createStore takes reducer as first argument.
 /* Reducers produce the state of your application */
 // reducer is a JS function that takes 2 parameters => current state and an action
