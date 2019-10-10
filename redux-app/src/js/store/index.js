@@ -1,7 +1,14 @@
 import { createStore } from "redux";
 import rootReducer from "../reducers/index";
+import { forbiddenWordsMiddleware } from "../middleware/index";
 
-const store = createStore(rootReducer); // createStore takes reducer as first argument, and reducers produce the state of your application
+const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // For using Redux Dev Tools together with other middlewares
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(forbiddenWordsMiddleware)
+); // createStore takes reducer as first argument.
+/* Reducers produce the state of your application */
 // reducer is a JS function that takes 2 parameters => current state and an action
 export default store;
 
